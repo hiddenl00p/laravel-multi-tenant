@@ -19,7 +19,12 @@ class LaravelMultiTenantServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->package('aura-is-here/laravel-multi-tenant');
+        // $this->package('aura-is-here/laravel-multi-tenant');
+        $config = realpath(__DIR__.'/../../config/config.php');
+
+        $this->publishes([
+            $config => config_path('tenant.php'),
+        ]);
     }
 
     /**
