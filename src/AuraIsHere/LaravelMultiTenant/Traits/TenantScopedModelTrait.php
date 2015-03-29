@@ -48,7 +48,7 @@ trait TenantScopedModelTrait
      */
     public function getTenantColumns()
     {
-        return isset($this->tenantColumns) ? $this->tenantColumns : Config::get('laravel-multi-tenant::default_tenant_columns');
+        return isset($this->tenantColumns) ? $this->tenantColumns : 'firm_id';
     }
 
     /**
@@ -77,7 +77,7 @@ trait TenantScopedModelTrait
     public static function findOrFail($id, $columns = ['*'])
     {
         try {
-            return parent::findOrFail($id, $columns);
+            return parent::query()->findOrFail($id, $columns);
         } catch (ModelNotFoundException $e) {
             throw with(new TenantModelNotFoundException())->setModel(get_called_class());
         }
